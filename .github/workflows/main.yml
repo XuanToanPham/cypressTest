@@ -1,19 +1,12 @@
-name: Cypress Tests using Cypress Docker Image
-
+name: E2E on Chrome
 on: [push]
-
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
-    container: cypress/browsers:node12.18.3-chrome87-ff82
+    runs-on: ubuntu-20.04
+    # let's make sure our tests pass on Chrome browser
+    name: E2E on Chrome
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v4 # use the explicit version number
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v4
         with:
-          # Specify Browser since container image is compile with Firefox
-          browser: firefox
+          browser: chrome
